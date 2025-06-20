@@ -29,5 +29,5 @@ replay_pid*
 ./api/target/
 ./keycloak/target/
 api/target/
-
+api/.mvn/
 keycloak/target
