@@ -1,0 +1,5 @@
+com/angelozero/keycloak/spi/LoginAuthenticatorFactory.class
+com/angelozero/keycloak/mapper/CustomAccessTokenMapper.class
+com/angelozero/keycloak/Main.class
+com/angelozero/keycloak/spi/LoginAuthenticator.class
+com/angelozero/keycloak/mapper/AccessTokenDTO.class
