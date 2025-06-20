@@ -28,3 +28,5 @@ replay_pid*
 
 ./api/target/
 ./keycloak/target/
+api/target/
+keycloak/target
