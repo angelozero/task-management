@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  mongo:
+    platform: linux/arm64/v8
+    image: mongo:4.4
+    container_name: mongo_container_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+  #    environment:
+  #      MONGO_INITDB_ROOT_USERNAME: root
+  #      MONGO_INITDB_ROOT_PASSWORD: terra
+  #      MONGO_INITDB_DATABASE: task-management-db
+
+  redis:
+    platform: linux/arm64/v8
+    image: redis:7.0
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+
+  postgres_reader:
+    platform: linux/arm64/v8
+    image: postgres:15-alpine
+    container_name: postgres_reader_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: master
+      POSTGRES_PASSWORD: terra
+      POSTGRES_DB: datasource_read
+    volumes:
+      - postgres_reader_data:/var/lib/postgresql/data
+
+  postgres_writer:
+    platform: linux/arm64/v8
+    image: postgres:15-alpine
+    container_name: postgres_writer_db
+    ports:
+      - "5678:5432"
+    environment:
+      POSTGRES_USER: master
+      POSTGRES_PASSWORD: terra
+      POSTGRES_DB: datasource_write
+    volumes:
+      - postgres_writer_data:/var/lib/postgresql/data
+
+  keycloak_postgres:
+    platform: linux/arm64/v8
+    image: postgres:15-alpine
+    container_name: keycloak_postgres_db
+    ports:
+      - "5898:5432" # Porta 5898 exposta para acesso externo, mapeando para a porta padrão 5432 do container
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - keycloak_postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak-network
+
+  rabbitmq:
+    platform: linux/arm64/v8
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq_broker
+    ports:
+      - "5672:5672"
+      - "15672:15672" #interface - http://localhost:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      # Optional:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbitmq_management listeners '[{port,15672}]'"
+
+  keycloak:
+    image: keycloak/keycloak:25.0.0
+    container_name: keycloak_container
+    networks:
+      - keycloak-network
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: keycloak_postgres
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    #      use these parameters if your keycloak version is 26.x.x
+    #      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+    #      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+
+    ports:
+      - "9090:8080"
+    platform: linux/amd64
+    command: start-dev --debug
+    depends_on:
+      - keycloak_postgres
+
+volumes:
+  mongo_data:
+  postgres_reader_data:
+  postgres_writer_data:
+  keycloak_postgres_data:
+  rabbitmq_data:
+
+networks:
+  keycloak-network:
+    driver: bridge
+
+# para executar um contentor num MacOs Sonoma 14.2.1 Apple M1 adicione "platform: linux/arm64/v8"
+# para executar o docker compose num MacOs Sonoma 14.2.1 Apple M1 use o comando docker-compose up -d
+# para executar o docker compose no Ubuntu 24.04.2 LTS use o comando docker compose up -d

@@ -13,20 +13,20 @@
 - 10 - gRPC - GRAPHQL (https://www.youtube.com/watch?v=SPu77SaK-Hk)
 - 11 - Integrations tests (REST / GRAPHQL)
 - 12 - Cash to the service for PokeApi using Redis (Docker)
-- 13 - Sealed and non sealed class
+- 13 - Sealed and non sealed class 
 - 14 - Dual datasource (DataSourceOrchestration.md)
 - 15 - RabbitMq
 - 16 - Dynamic Beans (https://www.youtube.com/watch?v=ieTORk_jsVs&ab_channel=JavaTechie)
 
 ## Doing
-- 17 - Design patterns
-    - factory
-    - chain of responsibility
+- 17 - Design patterns 
+  - factory
+  - chain of responsibility
 
 ## To do
 - JWT Authentication with Keycloak
-    - Keycloak
-        - issue with object list in token
-        - override auth token
-        - custom conditional in a sub flow (https://github.com/jdelker/keycloak-conditional-authenticators/blob/master/src/main/java/de/jdelker/keycloak/authentication/authenticators/conditional/ConditionalHeaderAuthenticator.java)
-        - request to a keycloak and update user attributes https://g.co/gemini/share/4015b702ecb3
+  - Keycloak
+    - issue with object list in token
+    - override auth token
+    - custom conditional in a sub flow (https://github.com/jdelker/keycloak-conditional-authenticators/blob/master/src/main/java/de/jdelker/keycloak/authentication/authenticators/conditional/ConditionalHeaderAuthenticator.java)
+    - request to a keycloak and update user attributes https://g.co/gemini/share/4015b702ecb3

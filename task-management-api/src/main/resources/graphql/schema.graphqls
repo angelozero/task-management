@@ -1,0 +1,39 @@
+type Mutation {
+    savePerson(personInput: PersonInput): PersonOutput
+}
+
+type Query {
+    personById(id: String): PersonOutput
+    personByEmail(email: String): PersonOutput
+}
+
+input PersonInput {
+    name: String!,
+    email: String!,
+    profileInfo: String,
+    taskList: [TaskInput]
+}
+
+input TaskInput {
+    id: String,
+    description: String,
+    completed: Boolean,
+    statusCode: Int
+
+}
+
+type PersonOutput {
+    id: String!,
+    name: String,
+    email: String,
+    profileInfo: String,
+    taskList: [TaskOutput]
+}
+
+type TaskOutput {
+    id: String,
+    description: String,
+    completed: Boolean,
+    statusDescription: String,
+    statusCode: Int
+}
