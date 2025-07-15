@@ -17,11 +17,10 @@
 - 14 - Dual datasource (DataSourceOrchestration.md)
 - 15 - RabbitMq
 - 16 - Dynamic Beans (https://www.youtube.com/watch?v=ieTORk_jsVs&ab_channel=JavaTechie)
+- 17 - Design patterns
 
 ## Doing
-- 17 - Design patterns
-    - factory
-    - chain of responsibility
+- Jacoco
 
 ## To do
 - JWT Authentication with Keycloak

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.angelozero.keycloak.custom.spi</groupId>
-    <artifactId>keycloak-custom-spi</artifactId>
+    <artifactId>auth-spi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>keycloak.custom.spi</name>
     <description>Simple project creating a custom keycloak spi</description>

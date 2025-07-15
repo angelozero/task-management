@@ -3,6 +3,7 @@ package com.angelozero.task.management.entity.unit.usecase.event;
 import com.angelozero.task.management.entity.Event;
 import com.angelozero.task.management.usecase.gateway.event.EventReaderGateway;
 import com.angelozero.task.management.usecase.services.event.EventConsumerUseCase;
+import com.angelozero.task.management.usecase.services.notification.HandleNotificationUseCase;
 import com.angelozero.task.management.usecase.services.notification.factory.NotificationFactory;
 import com.angelozero.task.management.usecase.services.notification.factory.NotificationTaskUseCase;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +25,9 @@ public class EventConsumerUseCaseTest {
     @Mock
     private EventReaderGateway eventReaderGateway;
 
+    @Mock
+    private HandleNotificationUseCase handleNotificationUseCase;
+
     @InjectMocks
     private EventConsumerUseCase eventConsumerUseCase;
 
@@ -33,6 +37,7 @@ public class EventConsumerUseCaseTest {
         var eventMock = getEventMock();
 
         when(eventReaderGateway.save(any(Event.class))).thenReturn(eventMock);
+        doNothing().when(handleNotificationUseCase).execute(anyString());
 
         assertDoesNotThrow(() -> eventConsumerUseCase.execute(eventMock));
 

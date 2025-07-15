@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.angelozero.task.management</groupId>
-    <artifactId>task.management</artifactId>
+    <artifactId>task-management-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>task-management</name>
     <description>task management api</description>
