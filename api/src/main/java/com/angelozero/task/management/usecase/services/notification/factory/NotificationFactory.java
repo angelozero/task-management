@@ -1,4 +1,4 @@
-package com.angelozero.task.management.usecase.services.notification;
+package com.angelozero.task.management.usecase.services.notification.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

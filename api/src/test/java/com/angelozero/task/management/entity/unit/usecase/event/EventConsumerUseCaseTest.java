@@ -3,8 +3,8 @@ package com.angelozero.task.management.entity.unit.usecase.event;
 import com.angelozero.task.management.entity.Event;
 import com.angelozero.task.management.usecase.gateway.event.EventReaderGateway;
 import com.angelozero.task.management.usecase.services.event.EventConsumerUseCase;
-import com.angelozero.task.management.usecase.services.notification.NotificationFactory;
-import com.angelozero.task.management.usecase.services.notification.NotificationTaskUseCase;
+import com.angelozero.task.management.usecase.services.notification.factory.NotificationFactory;
+import com.angelozero.task.management.usecase.services.notification.factory.NotificationTaskUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,12 +24,6 @@ public class EventConsumerUseCaseTest {
     @Mock
     private EventReaderGateway eventReaderGateway;
 
-    @Mock
-    private NotificationFactory notificationFactory;
-
-    @Mock
-    private NotificationTaskUseCase notificationTaskUseCase;
-
     @InjectMocks
     private EventConsumerUseCase eventConsumerUseCase;
 
@@ -39,8 +33,6 @@ public class EventConsumerUseCaseTest {
         var eventMock = getEventMock();
 
         when(eventReaderGateway.save(any(Event.class))).thenReturn(eventMock);
-        when(notificationFactory.createNotification(any())).thenReturn(notificationTaskUseCase);
-        doNothing().when(notificationTaskUseCase).execute(any());
 
         assertDoesNotThrow(() -> eventConsumerUseCase.execute(eventMock));
 
