@@ -172,17 +172,47 @@
 
     <build>
         <plugins>
+            <!-- JaCoCo -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.13</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/**/TaskManagementApplication.*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/config/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/controller/datatransfer/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/controller/handler/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/controller/mapper/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/controller/rest/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/dataprovider/jpa/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/dataprovider/mapper/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/dataprovider/rest/**/*</exclude>
+                        <exclude>com/angelozero/task/management/adapter/properties/**/*</exclude>
+                        <exclude>com/angelozero/task/management/entity/**/*</exclude>
+                        <exclude>com/angelozero/task/management/usecase/exception/**/*</exclude>
+                        <exclude>com/angelozero/task/management/usecase/gateway/**/*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!--  removing the mockito warning -->
-            <!-- Please add Mockito as an agent to your build what is described in Mockito's documentation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>
-                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
-                        -Xshare:off
-                    </argLine>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
