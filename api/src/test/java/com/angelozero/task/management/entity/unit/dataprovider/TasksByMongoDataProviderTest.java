@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.testcontainers.shaded.org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -91,6 +92,22 @@ public class TasksByMongoDataProviderTest {
         when(taskDataProviderMapper.toTaskList(any())).thenReturn(taskListMock);
 
         var response = tasksByMongoDataProvider.findAll(0, 1, "sorted field", null);
+
+        assertNotNull(response);
+        verify(taskRepository, never()).findByCompleted(any(), any());
+    }
+
+    @Test
+    @DisplayName("Should find a pageable tasks with success - without sorted field")
+    void shouldFindPageableTasksWithSuccessWithoutSortedField() {
+        var taskListEntityMock = getTaskEntityListMock();
+        var pageMock = new PageImpl<>(taskListEntityMock);
+        var taskListMock = getTaskListMock();
+
+        when(taskRepository.findAll(any(PageRequest.class))).thenReturn(pageMock);
+        when(taskDataProviderMapper.toTaskList(any())).thenReturn(taskListMock);
+
+        var response = tasksByMongoDataProvider.findAll(0, 1, StringUtils.EMPTY, null);
 
         assertNotNull(response);
         verify(taskRepository, never()).findByCompleted(any(), any());
