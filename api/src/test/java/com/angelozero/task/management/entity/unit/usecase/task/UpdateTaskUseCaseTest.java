@@ -54,6 +54,33 @@ public class UpdateTaskUseCaseTest {
     }
 
     @Test
+    @DisplayName("Should update a Task with success - different description - null isCompleted")
+    public void shouldUpdateTaskWithSuccessDifferentDescriptionNullIsCompleted() {
+        var savedTaskMock = new Task("task-id", "description", true, new Completed());
+        var taskMock = new Task("task-id", "description-test", null, new Completed());
+
+        when(taskGateway.findById(anyString())).thenReturn(savedTaskMock);
+        when(taskGateway.update(any(Task.class))).thenReturn(taskMock);
+
+        var response = updateTaskUseCase.execute("task-id", taskMock);
+
+        assertNotNull(response);
+    }
+
+    @Test
+    @DisplayName("Should not update a Task -  task not found")
+    public void shouldNotUpdateTaskTaskNotFound() {
+        var taskMock = new Task("task-id", "description-test", false, new Completed());
+
+        when(taskGateway.findById(anyString())).thenReturn(null);
+
+        var response = updateTaskUseCase.execute("task-id", taskMock);
+
+        assertNull(response);
+        verify(taskGateway, never()).update(any());
+    }
+
+    @Test
     @DisplayName("Should fail to update a task without id")
     public void shouldFailToUpdateTaskWithoutId() {
         var exception = assertThrows(BusinessException.class,
