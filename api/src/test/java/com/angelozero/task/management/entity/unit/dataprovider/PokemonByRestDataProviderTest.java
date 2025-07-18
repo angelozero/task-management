@@ -6,6 +6,7 @@ import com.angelozero.task.management.adapter.dataprovider.rest.PokemonApiFeignC
 import com.angelozero.task.management.adapter.dataprovider.rest.request.PokemonResponse;
 import com.angelozero.task.management.entity.Pokemon;
 import com.angelozero.task.management.usecase.exception.RestDataProviderException;
+import com.angelozero.task.management.usecase.util.RandomNumber;
 import feign.FeignException;
 import feign.Request;
 import feign.Response;
@@ -16,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +33,9 @@ public class PokemonByRestDataProviderTest {
 
     @Mock
     private PokemonDataProviderMapper pokemonDataProviderMapper;
+
+    @Mock
+    private RandomNumber randomNumber;
 
     @InjectMocks
     private PokemonByRestDataProvider pokemonByRestDataProvider;
@@ -139,5 +144,46 @@ public class PokemonByRestDataProviderTest {
         assertEquals(errorMessage, exception.getMessage());
 
         verify(pokemonDataProviderMapper, never()).toPokemon(any(PokemonResponse.class));
+    }
+
+    @Test
+    @DisplayName("Should call without circuit breaker")
+    void shouldCallWithoutCircuitBreaker() {
+        var pokemonResponseMock = new PokemonResponse(null, null, null);
+        var pokemonMock = new Pokemon(0, "test", "test");
+
+        when(pokemonApiFeignClient.getPokemonByNumber(anyInt())).thenReturn(pokemonResponseMock);
+        when(pokemonDataProviderMapper.toPokemon(any(PokemonResponse.class))).thenReturn(pokemonMock);
+        when(randomNumber.get(anyInt())).thenReturn(10);
+
+        var response = pokemonByRestDataProvider.findByRandomValue();
+
+        assertNotNull(response);
+    }
+
+    @Test
+    @DisplayName("Should call without circuit breaker - fail pokemon number")
+    void shouldCallWithoutCircuitBreakerFailPokemonNumber() {
+        var errorMessage = "Test fail to circuit breaker!";
+
+        when(randomNumber.get(anyInt())).thenReturn(151);
+
+        var exception = assertThrows(RuntimeException.class,
+                () -> pokemonByRestDataProvider.findByRandomValue());
+
+        assertNotNull(exception);
+        assertEquals(errorMessage, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should test circuit breaker fallback method")
+    void shouldTestCircuitBreakerFallbackMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        var pokemonByRestDataProv = new PokemonByRestDataProvider(null, null, null);
+        var fallBackGetPokemonByDefault = PokemonByRestDataProvider.class.getDeclaredMethod("fallBackGetPokemonByDefault", Exception.class);
+        fallBackGetPokemonByDefault.setAccessible(true);
+        var response = fallBackGetPokemonByDefault.invoke(pokemonByRestDataProv, new Exception());
+
+        assertNotNull(response);
     }
 }

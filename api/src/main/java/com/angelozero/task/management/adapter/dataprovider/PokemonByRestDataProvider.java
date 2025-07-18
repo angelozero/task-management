@@ -5,6 +5,7 @@ import com.angelozero.task.management.adapter.dataprovider.rest.PokemonApiFeignC
 import com.angelozero.task.management.entity.Pokemon;
 import com.angelozero.task.management.usecase.exception.RestDataProviderException;
 import com.angelozero.task.management.usecase.gateway.PokemonGateway;
+import com.angelozero.task.management.usecase.util.RandomNumber;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class PokemonByRestDataProvider implements PokemonGateway {
 
     private final PokemonApiFeignClient pokemonApiFeignClient;
     private final PokemonDataProviderMapper pokemonDataProviderMapper;
+    private final RandomNumber randomNumber;
 
     @Override
     public Pokemon findByName(String name) {
@@ -58,11 +60,12 @@ public class PokemonByRestDataProvider implements PokemonGateway {
     @Override
     @CircuitBreaker(name = "PokemonByRestDataProvider", fallbackMethod = "fallBackGetPokemonByDefault")
     public Pokemon findByRandomValue() {
-        var randomNumber = new Random().nextInt((300) + 1);
-        if (randomNumber > 150) {
+        var randomNumberValue = randomNumber.get(300);
+
+        if (randomNumberValue > 150) {
             throw new RuntimeException("Test fail to circuit breaker!");
         }
-        return findByNumber(randomNumber);
+        return findByNumber(randomNumberValue);
     }
 
     private Pokemon fallBackGetPokemonByDefault(Exception ex) {

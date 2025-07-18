@@ -192,6 +192,7 @@
                         <exclude>com/angelozero/task/management/entity/**/*</exclude>
                         <exclude>com/angelozero/task/management/usecase/exception/**/*</exclude>
                         <exclude>com/angelozero/task/management/usecase/gateway/**/*</exclude>
+                        <exclude>com/angelozero/task/management/usecase/util/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
