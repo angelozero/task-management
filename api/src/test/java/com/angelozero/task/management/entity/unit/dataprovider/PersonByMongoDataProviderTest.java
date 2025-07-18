@@ -176,10 +176,59 @@ public class PersonByMongoDataProviderTest {
     }
 
     @Test
+    @DisplayName("Should update a Person with success - null TaskEntityList")
+    void shouldUpdatePersonWithSuccessNullTaskEntityList() {
+        var personEntityMock = getPeronEntityMock();
+        var tasEntityListMock = getTaskEntityListMock();
+        var personMock = getPersonMock();
+
+        when(taskDataProviderMapper.toTaskEntityList(anyList())).thenReturn(null);
+        when(personDataProviderMapper.toPersonEntity(any(), any())).thenReturn(personEntityMock);
+        when(personRepository.save(any())).thenReturn(personEntityMock);
+        when(taskRepository.findByIdIn(anyList())).thenReturn(tasEntityListMock);
+        when(personDataProviderMapper.toPerson(any(), any())).thenReturn(personMock);
+
+        var response = personByMongoDataProvider.update(personMock);
+
+        assertNotNull(response);
+    }
+
+    @Test
+    @DisplayName("Should update a Person with success - empty TaskEntityList")
+    void shouldUpdatePersonWithSuccessEmptyTaskEntityList() {
+        var personEntityMock = getPeronEntityMock();
+        var tasEntityListMock = getTaskEntityListMock();
+        var personMock = getPersonMock();
+
+        when(taskDataProviderMapper.toTaskEntityList(anyList())).thenReturn(Collections.emptyList());
+        when(personDataProviderMapper.toPersonEntity(any(), any())).thenReturn(personEntityMock);
+        when(personRepository.save(any())).thenReturn(personEntityMock);
+        when(taskRepository.findByIdIn(anyList())).thenReturn(tasEntityListMock);
+        when(personDataProviderMapper.toPerson(any(), any())).thenReturn(personMock);
+
+        var response = personByMongoDataProvider.update(personMock);
+
+        assertNotNull(response);
+    }
+
+    @Test
     @DisplayName("Should delete a Person with success")
     void shouldDeletePersonWithSuccess() {
         var personEntityMock = getPeronEntityMock();
         var personMock = getPersonMock();
+
+        when(personDataProviderMapper.toPersonEntity(any(), any())).thenReturn(personEntityMock);
+        doNothing().when(taskRepository).deleteAllById(any());
+        doNothing().when(personRepository).delete(any());
+
+        assertDoesNotThrow(() -> personByMongoDataProvider.delete(personMock));
+    }
+
+    @Test
+    @DisplayName("Should delete a Person with success - null person")
+    void shouldDeletePersonWithSuccessNullPerson() {
+        var personEntityMock = getPeronEntityMock();
+        var personMock = getPersonWithoutListMock();
 
         when(personDataProviderMapper.toPersonEntity(any(), any())).thenReturn(personEntityMock);
         doNothing().when(taskRepository).deleteAllById(any());
@@ -354,6 +403,14 @@ public class PersonByMongoDataProviderTest {
                 "email",
                 "profile-info",
                 List.of(getTaskMock()));
+    }
+
+    private Person getPersonWithoutListMock() {
+        return new Person("1",
+                "name",
+                "email",
+                "profile-info",
+                null);
     }
 
     private List<TaskEntity> getTaskEntityListMock() {
