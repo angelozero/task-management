@@ -1,6 +1,7 @@
 package com.angelozero.task.management.entity.unit.usecase.pokemon;
 
 import com.angelozero.task.management.entity.Pokemon;
+import com.angelozero.task.management.usecase.exception.BusinessException;
 import com.angelozero.task.management.usecase.services.pokemon.GetPokemonByNumberUseCase;
 import com.angelozero.task.management.usecase.gateway.PokemonGateway;
 import org.junit.jupiter.api.DisplayName;
@@ -10,10 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GetPokemonByNumberUseCaseUseCaseUseCaseTest {
@@ -44,5 +44,17 @@ public class GetPokemonByNumberUseCaseUseCaseUseCaseTest {
         var response = getPokemonByNumberUseCase.execute(0);
 
         assertNull(response);
+    }
+
+    @Test
+    @DisplayName("Should fail to find a pokemon by number")
+    public void shouldFailFindPokemonByNumber() {
+
+        var exception = assertThrows(BusinessException.class, () -> getPokemonByNumberUseCase.execute(null));
+
+        assertNotNull(exception);
+        assertEquals("No Pokemon number was informed to be found", exception.getMessage());
+
+        verify(pokemonGateway, never()).findByNumber(anyInt());
     }
 }
