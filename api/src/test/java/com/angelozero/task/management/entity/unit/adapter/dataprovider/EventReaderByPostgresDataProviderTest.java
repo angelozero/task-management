@@ -1,4 +1,4 @@
-package com.angelozero.task.management.entity.unit.dataprovider;
+package com.angelozero.task.management.entity.unit.adapter.dataprovider;
 
 import com.angelozero.task.management.adapter.dataprovider.EventReaderByPostgresDataProvider;
 import com.angelozero.task.management.adapter.dataprovider.jpa.entity.EventEntity;

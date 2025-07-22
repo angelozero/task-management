@@ -22,7 +22,7 @@ public class PersonGrpcController {
     private final FindPersonByEmailUseCase findPersonByEmailUseCase;
 
     @MutationMapping()
-    PersonOutput savePerson(@Argument PersonInput personInput) {
+    public PersonOutput savePerson(@Argument PersonInput personInput) {
         var personToSave = personDataTransferMapper.toPerson(personInput);
         savePersonUseCase.execute(personToSave);
 
@@ -31,13 +31,13 @@ public class PersonGrpcController {
     }
 
     @QueryMapping()
-    PersonOutput personById(@Argument String id) {
+    public PersonOutput personById(@Argument String id) {
         var person = findPersonByIdUseCase.execute(id);
         return personDataTransferMapper.toPersonOutput(person);
     }
 
     @QueryMapping()
-    PersonOutput personByEmail(@Argument String email) {
+    public PersonOutput personByEmail(@Argument String email) {
         var person = findPersonByEmailUseCase.execute(email);
         return personDataTransferMapper.toPersonOutput(person);
     }

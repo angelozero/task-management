@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-class SendSmsNotificationTaskUseCase implements NotificationTaskUseCase {
+public class SendSmsNotificationTaskUseCase implements NotificationTaskUseCase {
     @Override
     public void execute(String message) {
         log.info("Notification by SMS with message {} sent with success", message);

@@ -1,8 +1,9 @@
 package com.angelozero.task.management.usecase.services.notification.factory;
 
+import com.angelozero.task.management.usecase.exception.BusinessException;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import jakarta.annotation.PostConstruct; // Import correto para @PostConstruct no Spring Boot 3+
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +14,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NotificationFactory {
 
-    private final List<NotificationTaskUseCase> notificationTasks; // Spring injeta todas as implementações
+    private final List<NotificationTaskUseCase> notificationTasks;
     private Map<NotificationTaskType, NotificationTaskUseCase> notificationMap;
 
 
-    // @PostConstruct is called after all dependencies were injected
     @PostConstruct
     public void init() {
         notificationMap = notificationTasks.stream()
@@ -27,7 +27,7 @@ public class NotificationFactory {
     public NotificationTaskUseCase createNotification(NotificationTaskType type) {
         var task = notificationMap.get(type);
         if (task == null) {
-            throw new IllegalArgumentException("Invalid notification type: " + type + ". No notification task found for this type.");
+            throw new BusinessException("Invalid notification type: " + type + ". No notification task found for this type.");
         }
         return task;
     }

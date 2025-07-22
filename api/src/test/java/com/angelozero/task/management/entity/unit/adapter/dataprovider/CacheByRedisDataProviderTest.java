@@ -1,4 +1,4 @@
-package com.angelozero.task.management.entity.unit.dataprovider;
+package com.angelozero.task.management.entity.unit.adapter.dataprovider;
 
 import com.angelozero.task.management.adapter.dataprovider.CacheByRedisDataProvider;
 import com.angelozero.task.management.usecase.exception.CacheDataProviderException;

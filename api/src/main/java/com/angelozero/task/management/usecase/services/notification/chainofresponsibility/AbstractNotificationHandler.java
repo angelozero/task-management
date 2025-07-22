@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractNotificationHandler implements NotificationHandler {
 
-    protected NotificationHandler nextHandler;
+    public NotificationHandler nextHandler;
 
     @Override
     public void setNextHandler(NotificationHandler nextHandler) {

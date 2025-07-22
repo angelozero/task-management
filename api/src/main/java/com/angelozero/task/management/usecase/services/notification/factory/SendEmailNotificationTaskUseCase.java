@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-class SendEmailNotificationTaskUseCase implements NotificationTaskUseCase {
+public class SendEmailNotificationTaskUseCase implements NotificationTaskUseCase {
     @Override
     public void execute(String message) {
         log.info("Notification by EMAIL with message {} sent with success", message);
