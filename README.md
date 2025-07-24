@@ -20,7 +20,7 @@
 - 17 - Design patterns
 
 ## Doing
-- Jacoco - coverage code with some unit tests
+- Jacoco - coverage code with some unit tests ( i`m tired )
 
 ## To do
 - JWT Authentication with Keycloak
