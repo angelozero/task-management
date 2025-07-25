@@ -11,9 +11,9 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAuthenticationFactory implements AuthenticatorFactory {
+public class TaskManagementAuthenticationFactory implements AuthenticatorFactory {
 
-    private static final CustomAuthenticator CUSTOM_AUTHENTICATOR_INSTANCE = new CustomAuthenticator();
+    private static final TaskManagementAuthenticator CUSTOM_AUTHENTICATOR_INSTANCE = new TaskManagementAuthenticator();
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
@@ -30,7 +30,7 @@ public class CustomAuthenticationFactory implements AuthenticatorFactory {
 
     @Override
     public String getDisplayType() {
-        return "AngeloZero - Custom Authentication";
+        return "Task Management Authentication";
     }
 
     @Override
@@ -50,31 +50,23 @@ public class CustomAuthenticationFactory implements AuthenticatorFactory {
 
     @Override
     public String getHelpText() {
-        return "Simple custom authentication by email and password trough a Postgres SQL database";
+        return "Simple authentication to access Task Management API";
     }
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
         final List<ProviderConfigProperty> configProperties = new ArrayList<>();
 
-        ProviderConfigProperty clientMasterConfig = new ProviderConfigProperty();
-        clientMasterConfig.setName(CustomAuthenticator.CUSTOM_AUTH_CLIENT_CONFIG_VALUE);
-        clientMasterConfig.setLabel("Object String List Token Attribute - interests_object_list");
-        clientMasterConfig.setType(ProviderConfigProperty.STRING_TYPE);
-        clientMasterConfig.setHelpText("This is an information about an object with a list inside the token");
-
         ProviderConfigProperty clientMasterEnableConfig = new ProviderConfigProperty();
-        clientMasterEnableConfig.setName(CustomAuthenticator.CUSTOM_AUTH_CLIENT_CONFIG_ENABLE);
-        clientMasterEnableConfig.setLabel("String List Token Attribute Name");
+        clientMasterEnableConfig.setName(TaskManagementAuthenticator.TASK_MANAGEMENT_CONFIG_ENABLE);
+        clientMasterEnableConfig.setLabel("Is enable ?");
         clientMasterEnableConfig.setType(ProviderConfigProperty.BOOLEAN_TYPE);
-        clientMasterEnableConfig.setHelpText("This is an information about a string list inside the token");
+        clientMasterEnableConfig.setHelpText("This is a simple component");
 
-        configProperties.add(clientMasterConfig);
         configProperties.add(clientMasterEnableConfig);
 
         return configProperties;
     }
-
 
     @Override
     public void init(Config.Scope scope) {
@@ -93,6 +85,6 @@ public class CustomAuthenticationFactory implements AuthenticatorFactory {
 
     @Override
     public String getId() {
-        return CustomAuthenticator.CUSTOM_AUTHENTICATOR_PROVIDER_ID;
+        return TaskManagementAuthenticator.TASK_MANAGEMENT_AUTHENTICATOR_PROVIDER_ID;
     }
 }

@@ -47,21 +47,6 @@ services:
     volumes:
       - postgres_writer_data:/var/lib/postgresql/data
 
-  keycloak_postgres:
-    platform: linux/arm64/v8
-    image: postgres:15-alpine
-    container_name: keycloak_postgres_db
-    ports:
-      - "5898:5432" # Porta 5898 exposta para acesso externo, mapeando para a porta padrão 5432 do container
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password
-    volumes:
-      - keycloak_postgres_data:/var/lib/postgresql/data
-    networks:
-      - keycloak-network
-
   rabbitmq:
     platform: linux/arm64/v8
     image: rabbitmq:3-management-alpine
@@ -83,12 +68,6 @@ services:
     networks:
       - keycloak-network
     environment:
-      DB_VENDOR: postgres
-      DB_ADDR: keycloak_postgres
-      DB_PORT: 5432
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     #      use these parameters if your keycloak version is 26.x.x
@@ -97,10 +76,9 @@ services:
 
     ports:
       - "9090:8080"
+      - "8787:8787"
     platform: linux/amd64
     command: start-dev --debug
-    depends_on:
-      - keycloak_postgres
 
 volumes:
   mongo_data:

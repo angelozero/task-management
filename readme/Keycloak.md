@@ -1,0 +1,6 @@
+- Para copiar o jar para dentro da pasta providers
+    - docker ps e copiar o nome do container Ex.: keycloak_container
+    - dentro da pasta com o jar criado digite o comando
+        - docker cp auth-spi.jar keycloak_container:/opt/keycloak/providers
+        - docker exec -it keycloak_container /opt/keycloak/bin/kc.sh build
+        - docker exec -it keycloak_container /opt/keycloak/bin/kc.sh start-dev --debug

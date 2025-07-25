@@ -18,14 +18,16 @@
 - 15 - RabbitMq
 - 16 - Dynamic Beans (https://www.youtube.com/watch?v=ieTORk_jsVs&ab_channel=JavaTechie)
 - 17 - Design patterns
+- 18 - Jacoco - coverage code with some unit tests
 
 ## Doing
-- Jacoco - coverage code with some unit tests ( i`m tired )
+- JWT Authentication with Keycloak
+    - Keycloak
+        - issue with object list in token
 
 ## To do
 - JWT Authentication with Keycloak
     - Keycloak
-        - issue with object list in token
         - override auth token
         - custom conditional in a sub flow (https://github.com/jdelker/keycloak-conditional-authenticators/blob/master/src/main/java/de/jdelker/keycloak/authentication/authenticators/conditional/ConditionalHeaderAuthenticator.java)
         - request to a keycloak and update user attributes https://g.co/gemini/share/4015b702ecb3
