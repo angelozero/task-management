@@ -1,4 +1,4 @@
-package com.angelozero.keycloak.custom.spi;
+package com.angelozero.keycloak.spi.auth;
 
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
@@ -11,13 +11,13 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskManagementAuthenticationFactory implements AuthenticatorFactory {
+public class AuthenticationFactory implements AuthenticatorFactory {
 
-    private static final TaskManagementAuthenticator CUSTOM_AUTHENTICATOR_INSTANCE = new TaskManagementAuthenticator();
+    private static final Authentication AUTHENTICATION_INSTANCE = new Authentication();
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
-        return CUSTOM_AUTHENTICATOR_INSTANCE;
+        return AUTHENTICATION_INSTANCE;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class TaskManagementAuthenticationFactory implements AuthenticatorFactory
 
     @Override
     public String getDisplayType() {
-        return "Task Management Authentication";
+        return "Authentication SPI";
     }
 
     @Override
@@ -50,20 +50,20 @@ public class TaskManagementAuthenticationFactory implements AuthenticatorFactory
 
     @Override
     public String getHelpText() {
-        return "Simple authentication to access Task Management API";
+        return "This is an Authentication SPI";
     }
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
         final List<ProviderConfigProperty> configProperties = new ArrayList<>();
 
-        ProviderConfigProperty clientMasterEnableConfig = new ProviderConfigProperty();
-        clientMasterEnableConfig.setName(TaskManagementAuthenticator.TASK_MANAGEMENT_CONFIG_ENABLE);
-        clientMasterEnableConfig.setLabel("Is enable ?");
-        clientMasterEnableConfig.setType(ProviderConfigProperty.BOOLEAN_TYPE);
-        clientMasterEnableConfig.setHelpText("This is a simple component");
+        ProviderConfigProperty providerConfigProperty = new ProviderConfigProperty();
+        providerConfigProperty.setName(Authentication.CONFIG_ENABLE);
+        providerConfigProperty.setLabel("Should access the conditional SPI ?");
+        providerConfigProperty.setType(ProviderConfigProperty.BOOLEAN_TYPE);
+        providerConfigProperty.setHelpText("Config to access (or not) the conditional spi");
 
-        configProperties.add(clientMasterEnableConfig);
+        configProperties.add(providerConfigProperty);
 
         return configProperties;
     }
@@ -85,6 +85,6 @@ public class TaskManagementAuthenticationFactory implements AuthenticatorFactory
 
     @Override
     public String getId() {
-        return TaskManagementAuthenticator.TASK_MANAGEMENT_AUTHENTICATOR_PROVIDER_ID;
+        return Authentication.ID;
     }
 }

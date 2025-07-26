@@ -1,4 +1,4 @@
-package com.angelozero.keycloak.custom.spi;
+package com.angelozero.keycloak.spi.auth;
 
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
@@ -8,34 +8,34 @@ import org.keycloak.models.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TaskManagementAuthenticator implements Authenticator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskManagementAuthenticator.class);
+public class Authentication implements Authenticator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Authentication.class);
 
-    public static final String TASK_MANAGEMENT_AUTHENTICATOR_PROVIDER_ID = "task-management-authenticator-id";
-    public static final String TASK_MANAGEMENT_CONFIG_ENABLE = "TASK_MANAGEMENT_CONFIG_ENABLE";
+    public static final String ID = "authentication-id";
+    public static final String CONFIG_ENABLE = "AUTHENTICATION_CONFIG_ENABLE";
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        LOGGER.info("[TaskManagement] - Custom Authenticator SPI");
+        LOGGER.info("[Authentication] - SPI");
 
         var userName = context.getHttpRequest().getDecodedFormParameters().getFirst("username");
         var password = context.getHttpRequest().getDecodedFormParameters().getFirst("password");
 
-        var clientMasterEnable = context.getAuthenticatorConfig() != null ?
-                context.getAuthenticatorConfig().getConfig().get(TASK_MANAGEMENT_CONFIG_ENABLE) : true;
+        var taskManagementConfigEnable = context.getAuthenticatorConfig() != null ?
+                context.getAuthenticatorConfig().getConfig().get(CONFIG_ENABLE) : false;
 
-        LOGGER.info("[TaskManagement] - User request data info:");
-        LOGGER.info("[TaskManagement] - USERNAME ---------------> {}", userName);
-        LOGGER.info("[TaskManagement] - PASSWORD ---------------> {}", password);
-        LOGGER.info("[TaskManagement] - IS ENABLE ? ------------> {}", clientMasterEnable);
+        LOGGER.info("[Authentication] - User request data info:");
+        LOGGER.info("[Authentication] - USERNAME --------------------> {}", userName);
+        LOGGER.info("[Authentication] - PASSWORD --------------------> {}", password);
+        LOGGER.info("[Authentication] - ACCESS CONDITIONAL SPI ? ----> {}", taskManagementConfigEnable);
 
         if (userName.equals("admin") && password.equals("admin")) {
-            LOGGER.info("[TaskManagement] - User ADMIN authenticated with success");
+            LOGGER.info("[Authentication] - User ADMIN authenticated with success");
             context.success();
             return;
         }
 
-        LOGGER.info("[TaskManagement] - User \"{}\" authenticated with success", userName);
+        LOGGER.info("[Authentication] - User \"{}\" authenticated with success", userName);
         context.success();
     }
 
