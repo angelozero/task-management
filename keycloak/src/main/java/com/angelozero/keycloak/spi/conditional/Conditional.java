@@ -13,27 +13,23 @@ public class Conditional implements ConditionalAuthenticator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Conditional.class);
 
-    public static final String ID = "conditional-id";
-    public static final Conditional SINGLETON = new Conditional();
-
     @Override
     public boolean matchCondition(AuthenticationFlowContext context) {
         LOGGER.info("[Conditional] - SPI");
         try {
-            var authenticationConfigEnable = Boolean.parseBoolean(
-                    context.getAuthenticatorConfig()
-                            .getConfig()
-                            .get(Authentication.CONFIG_ENABLE));
+            var authenticationConfigEnableProp = context.getAuthenticatorConfig().getConfig().get(Authentication.CONFIG_ENABLE);
+            var conditionalConfigEnableProp = context.getAuthenticatorConfig().getConfig().get(ConditionalFactory.ACCESS_CONFIG_VALUE);
 
-            var conditionalConfig = Boolean.parseBoolean(
-                    context.getAuthenticatorConfig()
-                            .getConfig().get(ConditionalFactory.ACCESS_CONFIG_VALUE));
+            var authenticationConfigEnableValue = Boolean.parseBoolean(authenticationConfigEnableProp);
+            var conditionalConfigEnableValue = Boolean.parseBoolean(conditionalConfigEnableProp);
 
-            LOGGER.info("[Conditional] - Authentication config value ----> {}", authenticationConfigEnable);
-            LOGGER.info("[Conditional] - Conditional config value -------> {}", conditionalConfig);
-            LOGGER.info("[Conditional] - Should access the sub flow ? ---> {}", authenticationConfigEnable && conditionalConfig ? "Yes" : "No");
+            LOGGER.info("[Conditional] - Authentication config prop -----> {}", authenticationConfigEnableProp);
+            LOGGER.info("[Conditional] - Authentication config value ----> {}", authenticationConfigEnableValue);
+            LOGGER.info("[Conditional] - Conditional config value -------> {}", conditionalConfigEnableProp);
+            LOGGER.info("[Conditional] - Conditional config prop --------> {}", conditionalConfigEnableValue);
+            LOGGER.info("[Conditional] - Should access the sub flow ? ---> {}", authenticationConfigEnableValue && conditionalConfigEnableValue ? "Yes" : "No");
 
-            return authenticationConfigEnable && conditionalConfig;
+            return authenticationConfigEnableValue && conditionalConfigEnableValue;
 
         } catch (Exception ex) {
             LOGGER.error("[Conditional] - Something went wrong while validating the conditional SPI - fail: {}", ex.getMessage());

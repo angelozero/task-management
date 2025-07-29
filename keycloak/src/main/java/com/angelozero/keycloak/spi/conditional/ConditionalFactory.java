@@ -14,10 +14,12 @@ import java.util.List;
 public class ConditionalFactory implements ConditionalAuthenticatorFactory {
 
     public static final String ACCESS_CONFIG_VALUE = "accessConfigValue";
+    public static final String ID = "conditional-id";
+    private static final Conditional CONDITIONAL_INSTANCE = new Conditional();
 
     @Override
     public ConditionalAuthenticator getSingleton() {
-        return Conditional.SINGLETON;
+        return CONDITIONAL_INSTANCE;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class ConditionalFactory implements ConditionalAuthenticatorFactory {
 
     @Override
     public String getId() {
-        return Conditional.ID;
+        return ID;
     }
 
     private static final List<ProviderConfigProperty> CONFIG_PROPERTIES = Collections.unmodifiableList(

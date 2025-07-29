@@ -14,6 +14,8 @@ import java.util.List;
 public class SubFlowFactory implements AuthenticatorFactory {
 
     public static final String CONFIG_VALUE = "configValue";
+    private static final String ID = "sub-flow-id";
+    private static final SubFlow SUB_FLOW_INSTANCE = new SubFlow();
 
     @Override
     public String getDisplayType() {
@@ -64,7 +66,7 @@ public class SubFlowFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
-        return null;
+        return SUB_FLOW_INSTANCE;
     }
 
     @Override
@@ -84,6 +86,6 @@ public class SubFlowFactory implements AuthenticatorFactory {
 
     @Override
     public String getId() {
-        return SubFlow.ID;
+        return ID;
     }
 }

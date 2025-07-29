@@ -1,7 +1,5 @@
 package com.angelozero.keycloak.spi.subflow;
 
-import com.angelozero.keycloak.spi.auth.Authentication;
-import com.angelozero.keycloak.spi.conditional.ConditionalFactory;
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.models.KeycloakSession;
@@ -13,15 +11,13 @@ import org.slf4j.LoggerFactory;
 public class SubFlow implements Authenticator {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubFlow.class);
 
-    public static final String ID = "sub-flow-id";
-
     @Override
     public void authenticate(AuthenticationFlowContext context) {
         LOGGER.info("[SubFlow] - SPI");
 
         var subFlowConfigValue = context.getAuthenticatorConfig().getConfig().get(SubFlowFactory.CONFIG_VALUE);
 
-        if (subFlowConfigValue.isBlank()) {
+        if (!subFlowConfigValue.isBlank()) {
             LOGGER.info("[SubFlow] - The value typed was ---> {}", subFlowConfigValue);
 
         } else {
