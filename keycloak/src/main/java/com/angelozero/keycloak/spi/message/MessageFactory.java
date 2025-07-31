@@ -1,4 +1,4 @@
-package com.angelozero.keycloak.spi.auth;
+package com.angelozero.keycloak.spi.message;
 
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
@@ -11,27 +11,15 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthenticationFactory implements AuthenticatorFactory {
+public class MessageFactory implements AuthenticatorFactory {
 
-    private static final String ID = "authentication-id";
-    private static final Authentication AUTHENTICATION_INSTANCE = new Authentication();
-
-    @Override
-    public Authenticator create(KeycloakSession keycloakSession) {
-        return AUTHENTICATION_INSTANCE;
-    }
-
-    @Override
-    public AuthenticationExecutionModel.Requirement[] getRequirementChoices() {
-        return new AuthenticationExecutionModel.Requirement[]{
-                AuthenticationExecutionModel.Requirement.REQUIRED,
-                AuthenticationExecutionModel.Requirement.DISABLED
-        };
-    }
+    public static final String CONFIG_VALUE = "configValue";
+    private static final String ID = "message-id";
+    private static final Message MESSAGE_INSTANCE = new Message();
 
     @Override
     public String getDisplayType() {
-        return "Authentication SPI";
+        return "Message SPI";
     }
 
     @Override
@@ -45,13 +33,21 @@ public class AuthenticationFactory implements AuthenticatorFactory {
     }
 
     @Override
+    public AuthenticationExecutionModel.Requirement[] getRequirementChoices() {
+        return new AuthenticationExecutionModel.Requirement[]{
+                AuthenticationExecutionModel.Requirement.REQUIRED,
+                AuthenticationExecutionModel.Requirement.DISABLED
+        };
+    }
+
+    @Override
     public boolean isUserSetupAllowed() {
-        return false;
+        return true;
     }
 
     @Override
     public String getHelpText() {
-        return "This is an Authentication SPI";
+        return "This is a Message SPI";
     }
 
     @Override
@@ -59,14 +55,18 @@ public class AuthenticationFactory implements AuthenticatorFactory {
         final List<ProviderConfigProperty> configProperties = new ArrayList<>();
 
         ProviderConfigProperty providerConfigProperty = new ProviderConfigProperty();
-        providerConfigProperty.setName(Authentication.CONFIG_ENABLE);
-        providerConfigProperty.setLabel("Should access the conditional SPI ?");
-        providerConfigProperty.setType(ProviderConfigProperty.BOOLEAN_TYPE);
-        providerConfigProperty.setHelpText("Config to access (or not) the conditional spi");
+        providerConfigProperty.setName(CONFIG_VALUE);
+        providerConfigProperty.setLabel("Type the final message here");
+        providerConfigProperty.setType(ProviderConfigProperty.STRING_TYPE);
 
         configProperties.add(providerConfigProperty);
 
         return configProperties;
+    }
+
+    @Override
+    public Authenticator create(KeycloakSession keycloakSession) {
+        return MESSAGE_INSTANCE;
     }
 
     @Override

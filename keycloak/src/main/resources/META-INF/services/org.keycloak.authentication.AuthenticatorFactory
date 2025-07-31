@@ -1,3 +1,4 @@
 com.angelozero.keycloak.spi.auth.AuthenticationFactory
 com.angelozero.keycloak.spi.conditional.ConditionalFactory
 com.angelozero.keycloak.spi.subflow.SubFlowFactory
+com.angelozero.keycloak.spi.message.MessageFactory

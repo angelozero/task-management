@@ -1,4 +1,4 @@
-package com.angelozero.keycloak.spi.subflow;
+package com.angelozero.keycloak.spi.message;
 
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
@@ -8,20 +8,20 @@ import org.keycloak.models.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SubFlow implements Authenticator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SubFlow.class);
+public class Message implements Authenticator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Message.class);
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
         LOGGER.info("\n");
 
-        var subFlowConfigValue = context.getAuthenticatorConfig().getConfig().get(SubFlowFactory.CONFIG_VALUE);
+        var subFlowConfigValue = context.getAuthenticatorConfig().getConfig().get(MessageFactory.CONFIG_VALUE);
 
         if (!subFlowConfigValue.isBlank()) {
-            LOGGER.info("[SubFlow] - The value typed was ---> {}", subFlowConfigValue);
+            LOGGER.info("[Message] - The final message is ---> {}", subFlowConfigValue);
 
         } else {
-            LOGGER.info("[SubFlow] - No value was typed");
+            LOGGER.info("[Message] - There is no final message to display.");
         }
 
         context.success();

@@ -11,23 +11,25 @@ import org.slf4j.LoggerFactory;
 public class Authentication implements Authenticator {
     private static final Logger LOGGER = LoggerFactory.getLogger(Authentication.class);
 
-    public static final String ID = "authentication-id";
+
     public static final String CONFIG_ENABLE = "AUTHENTICATION_CONFIG_ENABLE";
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        LOGGER.info("[Authentication] - SPI");
+        LOGGER.info("\n");
 
         var userName = context.getHttpRequest().getDecodedFormParameters().getFirst("username");
         var password = context.getHttpRequest().getDecodedFormParameters().getFirst("password");
 
-        var taskManagementConfigEnable = context.getAuthenticatorConfig() != null ?
+        var configEnable = context.getAuthenticatorConfig() != null ?
                 context.getAuthenticatorConfig().getConfig().get(CONFIG_ENABLE) : false;
 
+        context.getAuthenticationSession().setAuthNote(CONFIG_ENABLE, String.valueOf(configEnable));
+
         LOGGER.info("[Authentication] - User request data info:");
-        LOGGER.info("[Authentication] - USERNAME --------------------> {}", userName);
-        LOGGER.info("[Authentication] - PASSWORD --------------------> {}", password);
-        LOGGER.info("[Authentication] - ACCESS CONDITIONAL SPI ? ----> {}", taskManagementConfigEnable);
+        LOGGER.info("[Authentication] - Username ------------> {}", userName);
+        LOGGER.info("[Authentication] - Password ------------> {}", password);
+        LOGGER.info("[Authentication] - Spi configuration ---> {}", configEnable);
 
         if (userName.equals("admin") && password.equals("admin")) {
             LOGGER.info("[Authentication] - User ADMIN authenticated with success");

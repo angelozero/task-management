@@ -15,24 +15,22 @@ public class Conditional implements ConditionalAuthenticator {
 
     @Override
     public boolean matchCondition(AuthenticationFlowContext context) {
-        LOGGER.info("[Conditional] - SPI");
+        LOGGER.info("\n");
         try {
-            var authenticationConfigEnableProp = context.getAuthenticatorConfig().getConfig().get(Authentication.CONFIG_ENABLE);
+            var authenticationConfigEnableProp = context.getAuthenticationSession().getAuthNote(Authentication.CONFIG_ENABLE);
             var conditionalConfigEnableProp = context.getAuthenticatorConfig().getConfig().get(ConditionalFactory.ACCESS_CONFIG_VALUE);
 
             var authenticationConfigEnableValue = Boolean.parseBoolean(authenticationConfigEnableProp);
             var conditionalConfigEnableValue = Boolean.parseBoolean(conditionalConfigEnableProp);
 
-            LOGGER.info("[Conditional] - Authentication config prop -----> {}", authenticationConfigEnableProp);
             LOGGER.info("[Conditional] - Authentication config value ----> {}", authenticationConfigEnableValue);
             LOGGER.info("[Conditional] - Conditional config value -------> {}", conditionalConfigEnableProp);
-            LOGGER.info("[Conditional] - Conditional config prop --------> {}", conditionalConfigEnableValue);
             LOGGER.info("[Conditional] - Should access the sub flow ? ---> {}", authenticationConfigEnableValue && conditionalConfigEnableValue ? "Yes" : "No");
 
             return authenticationConfigEnableValue && conditionalConfigEnableValue;
 
         } catch (Exception ex) {
-            LOGGER.error("[Conditional] - Something went wrong while validating the conditional SPI - fail: {}", ex.getMessage());
+            LOGGER.error("[Conditional] - Something went wrong while validating the Conditional SPI - fail: {}", ex.getMessage());
             return false;
         }
     }
