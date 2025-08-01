@@ -58,15 +58,27 @@ public class AuthenticationFactory implements AuthenticatorFactory {
     public List<ProviderConfigProperty> getConfigProperties() {
         final List<ProviderConfigProperty> configProperties = new ArrayList<>();
 
-        ProviderConfigProperty providerConfigProperty = new ProviderConfigProperty();
-        providerConfigProperty.setName(Authentication.CONFIG_ENABLE);
-        providerConfigProperty.setLabel("Should access the conditional SPI ?");
-        providerConfigProperty.setType(ProviderConfigProperty.BOOLEAN_TYPE);
-        providerConfigProperty.setHelpText("Config to access (or not) the conditional spi");
+        var providerConfigPropertyForConditional = getProviderConfigProperty(Authentication.CONFIG_ENABLE_CONDITIONAL_SPI,
+                "Enable config to access Conditional SPI",
+                "Config to access (or not) the conditional spi");
 
-        configProperties.add(providerConfigProperty);
+        var providerConfigPropertyForTokenMapper = getProviderConfigProperty(Authentication.CONFIG_ENABLE_ACCESS_TOKEN_MAPPER,
+                "Enable config to transform the Access Token by Mapper",
+                "Config to transform (or not) the the access token");
+
+        configProperties.add(providerConfigPropertyForConditional);
+        configProperties.add(providerConfigPropertyForTokenMapper);
 
         return configProperties;
+    }
+
+    private ProviderConfigProperty getProviderConfigProperty(String configEnableAccessTokenMapper, String label, String helpText) {
+        ProviderConfigProperty providerConfigPropertyForTokenMapper = new ProviderConfigProperty();
+        providerConfigPropertyForTokenMapper.setName(configEnableAccessTokenMapper);
+        providerConfigPropertyForTokenMapper.setLabel(label);
+        providerConfigPropertyForTokenMapper.setType(ProviderConfigProperty.BOOLEAN_TYPE);
+        providerConfigPropertyForTokenMapper.setHelpText(helpText);
+        return providerConfigPropertyForTokenMapper;
     }
 
     @Override

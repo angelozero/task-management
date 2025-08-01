@@ -12,7 +12,8 @@ public class Authentication implements Authenticator {
     private static final Logger LOGGER = LoggerFactory.getLogger(Authentication.class);
 
 
-    public static final String CONFIG_ENABLE = "AUTHENTICATION_CONFIG_ENABLE";
+    public static final String CONFIG_ENABLE_CONDITIONAL_SPI = "CONFIG_ENABLE_CONDITIONAL_SPI";
+    public static final String CONFIG_ENABLE_ACCESS_TOKEN_MAPPER = "CONFIG_ENABLE_ACCESS_TOKEN_MAPPER";
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
@@ -22,9 +23,9 @@ public class Authentication implements Authenticator {
         var password = context.getHttpRequest().getDecodedFormParameters().getFirst("password");
 
         var configEnable = context.getAuthenticatorConfig() != null ?
-                context.getAuthenticatorConfig().getConfig().get(CONFIG_ENABLE) : false;
+                context.getAuthenticatorConfig().getConfig().get(CONFIG_ENABLE_CONDITIONAL_SPI) : false;
 
-        context.getAuthenticationSession().setAuthNote(CONFIG_ENABLE, String.valueOf(configEnable));
+        context.getAuthenticationSession().setAuthNote(CONFIG_ENABLE_CONDITIONAL_SPI, String.valueOf(configEnable));
 
         LOGGER.info("[Authentication] - User request data info:");
         LOGGER.info("[Authentication] - Username ------------> {}", userName);

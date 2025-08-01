@@ -17,7 +17,7 @@ public class Conditional implements ConditionalAuthenticator {
     public boolean matchCondition(AuthenticationFlowContext context) {
         LOGGER.info("\n");
         try {
-            var authenticationConfigEnableProp = context.getAuthenticationSession().getAuthNote(Authentication.CONFIG_ENABLE);
+            var authenticationConfigEnableProp = context.getAuthenticationSession().getAuthNote(Authentication.CONFIG_ENABLE_CONDITIONAL_SPI);
             var conditionalConfigEnableProp = context.getAuthenticatorConfig().getConfig().get(ConditionalFactory.ACCESS_CONFIG_VALUE);
 
             var authenticationConfigEnableValue = Boolean.parseBoolean(authenticationConfigEnableProp);
