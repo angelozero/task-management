@@ -24,8 +24,8 @@
 - JWT Authentication with Keycloak
     - Keycloak
         - DONE - custom conditional in a sub flow (https://github.com/jdelker/keycloak-conditional-authenticators/blob/master/src/main/java/de/jdelker/keycloak/authentication/authenticators/conditional/ConditionalHeaderAuthenticator.java)
-        - issue with object list in token
-        - override auth token
+        - DONE - issue with object list in token
+        - DONE - override auth token
         - request to a keycloak and update user attributes https://g.co/gemini/share/4015b702ecb3
 
 ## To do
