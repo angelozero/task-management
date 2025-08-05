@@ -1,4 +1,7 @@
 package com.angelozero.keycloak.spi.attribute.request;
 
-public record AttributeUpdateResponse(String attributeName, String attributeValue) {
+import java.util.List;
+import java.util.Map;
+
+public record AttributeUpdateResponse(Map<String, List<String>> attributeValues) {
 }

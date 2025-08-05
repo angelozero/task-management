@@ -34,14 +34,19 @@ public class UserAttributeUpdaterResource {
 
     // path: /auth/realms/{realm}/user-attribute-updater/users/{userId}/attribute
     @PUT
-    @Path("users/{userId}/attribute")
+    @Path("users/{userName}/attribute")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateSingleUserAttribute(@PathParam("userId") String userId, AttributeUpdateRequest request) {
+    public Response updateSingleUserAttribute(@PathParam("userName") String userName, AttributeUpdateRequest request) {
         LOGGER.info("\n");
         LOGGER.info("[UserAttributeUpdaterResource] - @PUT");
 
-        var auth = new AppAuthManager().authenticateIdentityCookie(session, realm);
+        var auth = new AppAuthManager.BearerTokenAuthenticator(session)
+                .setRealm(realm)
+                .setUriInfo(session.getContext().getUri())
+                .setConnection(session.getContext().getConnection())
+                .setHeaders(session.getContext().getRequestHeaders())
+                .authenticate();
 
         if (isValidAuthentication(auth)) {
             return Response.status(Response.Status.UNAUTHORIZED)
@@ -61,7 +66,7 @@ public class UserAttributeUpdaterResource {
                     .build();
         }
 
-        var user = session.users().getUserById(realm, userId);
+        var user = session.users().getUserByUsername(realm, userName);
 
         if (isValidUser(user)) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -81,13 +86,18 @@ public class UserAttributeUpdaterResource {
     }
 
     @GET
-    @Path("users/{userId}/attribute/{attributeName}")
+    @Path("users/{userName}/attributes")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserAttribute(@PathParam("userId") String userId, @PathParam("attributeName") String attributeName) {
+    public Response getUserAttribute(@PathParam("userName") String userName) {
         LOGGER.info("\n");
         LOGGER.info("[UserAttributeUpdaterResource] - @GET");
 
-        var auth = new AppAuthManager().authenticateIdentityCookie(session, realm);
+        var auth = new AppAuthManager.BearerTokenAuthenticator(session)
+                .setRealm(realm)
+                .setUriInfo(session.getContext().getUri())
+                .setConnection(session.getContext().getConnection())
+                .setHeaders(session.getContext().getRequestHeaders())
+                .authenticate();
 
         if (isValidAuthentication(auth)) {
             return Response.status(Response.Status.UNAUTHORIZED)
@@ -101,7 +111,7 @@ public class UserAttributeUpdaterResource {
                     .build();
         }
 
-        UserModel user = session.users().getUserById(realm, userId);
+        UserModel user = session.users().getUserByUsername(realm, userName);
 
         if (isValidUser(user)) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -109,9 +119,9 @@ public class UserAttributeUpdaterResource {
                     .build();
         }
 
-        var attributeValue = user.getFirstAttribute(attributeName);
+        var attributes = user.getAttributes();
 
-        var response = new AttributeUpdateResponse(attributeName, attributeValue != null ? attributeValue : "null");
+        var response = new AttributeUpdateResponse(attributes);
 
         LOGGER.info("[UserAttributeUpdaterResource] - GET Request success - Response {}", response);
         return Response.ok(response).build();
