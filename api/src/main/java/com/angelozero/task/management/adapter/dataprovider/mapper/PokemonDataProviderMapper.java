@@ -1,6 +1,6 @@
 package com.angelozero.task.management.adapter.dataprovider.mapper;
 
-import com.angelozero.task.management.adapter.dataprovider.rest.request.PokemonResponse;
+import com.angelozero.task.management.adapter.dataprovider.rest.response.pokemon.PokemonResponse;
 import com.angelozero.task.management.entity.Pokemon;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

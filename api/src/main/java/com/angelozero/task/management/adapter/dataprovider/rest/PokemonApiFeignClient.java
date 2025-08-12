@@ -1,6 +1,6 @@
 package com.angelozero.task.management.adapter.dataprovider.rest;
 
-import com.angelozero.task.management.adapter.dataprovider.rest.request.PokemonResponse;
+import com.angelozero.task.management.adapter.dataprovider.rest.response.pokemon.PokemonResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -3,7 +3,7 @@ package com.angelozero.task.management.entity.unit.adapter.dataprovider;
 import com.angelozero.task.management.adapter.dataprovider.PokemonByRestDataProvider;
 import com.angelozero.task.management.adapter.dataprovider.mapper.PokemonDataProviderMapper;
 import com.angelozero.task.management.adapter.dataprovider.rest.PokemonApiFeignClient;
-import com.angelozero.task.management.adapter.dataprovider.rest.request.PokemonResponse;
+import com.angelozero.task.management.adapter.dataprovider.rest.response.pokemon.PokemonResponse;
 import com.angelozero.task.management.entity.Pokemon;
 import com.angelozero.task.management.usecase.exception.RestDataProviderException;
 import com.angelozero.task.management.usecase.util.RandomNumber;
