@@ -68,6 +68,7 @@ services:
     networks:
       - keycloak-network
     environment:
+      DEBUG_PORT: "*:8787"
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     #      use these parameters if your keycloak version is 26.x.x
