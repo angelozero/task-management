@@ -27,7 +27,7 @@
         - DONE - issue with object list in token
         - DONE - override auth token
         - DONE - request to a keycloak and update user attributes https://g.co/gemini/share/4015b702ecb3
-        - rest validation to call the api
+        - rest validation to call the api ...
 
 ## To do
 - Update Readme
