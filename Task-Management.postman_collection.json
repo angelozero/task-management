@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "3bb30ba0-bb8c-44b8-8fd5-da7d8244c4af",
+		"name": "Task-Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12384551"
+	},
+	"item": [
+		{
+			"name": "Api",
+			"item": [
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task/68253ee5b0ce9e45da400a1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"68253ee5b0ce9e45da400a1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Keycloak Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"gauss\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/keycloak/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"keycloak",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dynamic Bean",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task/68253ee5b0ce9e45da400a1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"68253ee5b0ce9e45da400a1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": "description",
+									"disabled": true
+								},
+								{
+									"key": "isCompleted",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "isCompleted",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/person/682688edfeef93394b5a7924",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"person",
+								"682688edfeef93394b5a7924"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": "description",
+									"disabled": true
+								},
+								{
+									"key": "isCompleted",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event - by person email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event?email=angelo@zero.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "angelo@zero.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pokemon by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemon/mewtwo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemon",
+								"mewtwo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation { savePerson(personInput: { name: \\\"angelo\\\", email: \\\"angelo@zero.com\\\", profileInfo: \\\"this is a test\\\", taskList: [ { id: null, description: \\\"Task 1\\\", completed: false, statusCode: 1 }, { id: null, description: \\\"Task 2\\\", completed: true, statusCode: 2 }, { id: null, description: \\\"Task 3\\\", completed: false, statusCode: 3 } ] }) { id email }}\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"graphql"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \\\n  http://localhost:8080/graphql \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"query\": \"mutation { savePerson(personInput: { name: \\\"angelo\\\", email: \\\"angelo@zero.com\\\", profileInfo: \\\"this is a test\\\", taskList: [ { id: null, description: \\\"Task 1\\\", completed: false, statusCode: 1 }, { id: null, description: \\\"Task 2\\\", completed: true, statusCode: 2 }, { id: null, description: \\\"Task 3\\\", completed: false, statusCode: 3 } ] }) { id email }}\"\n  }'"
+					},
+					"response": []
+				},
+				{
+					"name": "Save Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"taskId\": \"6875b32c0341c829e5efc771\",\n    \"email\": \"angelo@zero.com\",\n    \"message\": \"Publish Test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"true\",\n    \"completed\": \"true\",\n     \"statusCode\": 1\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task/68253ee5b0ce9e45da400a1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"68253ee5b0ce9e45da400a1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event Read Status - by event id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"true\",\n    \"completed\": \"true\",\n     \"statusCode\": 1\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event?eventId=1&isRead=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "1"
+								},
+								{
+									"key": "isRead",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event Read Status - by event person email",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"true\",\n    \"completed\": \"true\",\n     \"statusCode\": 1\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event?eventPersonEmail=angelo@zero.com&isRead=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							],
+							"query": [
+								{
+									"key": "eventPersonEmail",
+									"value": "angelo@zero.com"
+								},
+								{
+									"key": "isRead",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task/67bfbdf0b5925f4f80dc9ab7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"67bfbdf0b5925f4f80dc9ab7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keycloak",
+			"item": [
+				{
+					"name": "SPI Tests",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "fETGa1qAeYFQDS3IUPRJnhu4I75sj6mG",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "master-client-id",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:9090/realms/task-management/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "http://localhost:9090/realms/task-management/protocol/openid-connect/auth",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Rest Client Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "rest-client-id",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "cY1oLMtFmrydt4NSTkaXUg2I0hzHyABx",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9090/realms/task-management/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"realms",
+								"task-management",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						},
+						"description": "Generated from cURL: curl --location --request POST 'http://localhost:9090/realms/{seu_realm}/protocol/openid-connect/token' \\\n--header 'Content-Type: application/x-www-form-urlencoded' \\\n--data-urlencode 'grant_type=client_credentials' \\\n--data-urlencode 'client_id={seu_client_id}' \\\n--data-urlencode 'client_secret={seu_client_secret}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Attributes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0bEFaMUpacHVGdFJVdUdtaU01TGtSN3V5QkhTNkNzaHpjd2cyWGgtMXJNIn0.eyJleHAiOjE3NTQ5NjQ5ODUsImlhdCI6MTc1NDk2MzE4NSwianRpIjoiNjk0MTgxNjQtNmRlMS00YjQ5LThkZjAtY2M2ODE4ZDZiMWE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy90YXNrLW1hbmFnZW1lbnQiLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiNmMwNDIwN2UtNDc4MC00YTljLWIzNWUtNjQxMzRiYTNlODUwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicmVzdC1jbGllbnQtaWQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGFzay1tYW5hZ2VtZW50Iiwib2ZmbGluZV9hY2Nlc3MiLCJ1cGRhdGUtdXNlci1hdHRyaWJ1dGVzLXJvbGUiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImdldC11c2VyLWF0dHJpYnV0ZXMtcm9sZSJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS1ncm91cHMiLCJxdWVyeS11c2VycyJdfSwicmVzdC1jbGllbnQtaWQiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImRhdGFfbGlzdCI6eyJkYXRhTGlzdCI6WyJkYXRhLTEiLCJkYXRhLTIiLCJkYXRhLTIiXX0sImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjE5Mi4xNjguNjUuMSIsImluZm9fZGF0YSI6eyJpbmZvRGF0YUxpc3QiOlt7ImluZm8iOiJpbmZvLWRhdGEtMSJ9LHsiaW5mbyI6ImluZm8tZGF0YS0yIn0seyJpbmZvIjoiaW5mby1kYXRhLTMifV19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtcmVzdC1jbGllbnQtaWQiLCJjbGllbnRBZGRyZXNzIjoiMTkyLjE2OC42NS4xIiwiY2xpZW50X2lkIjoicmVzdC1jbGllbnQtaWQifQ.pD-MBAmy6Nnvnqi-rMRaesAoD5qhjPCh0pZCkdtnun_EBHn2eo-CnI17mdTyqXszOHDzHZF3TvaSeTO7EMHzTVae3BLYbULVFj51KLZKQ-Zwux2eNp0JI5E09UcTLDCByTZldxj1R3QxODP3d05j7AVYI-MJh-FJUr-uoJceM8NrGyTj_9Si9UXSccalEI6bPbebfFokI9ngumOD212w6qp9hI9KQiXKr8fbQpXqsweWE6QBYl4l6eRF6oNQeUvyvxsWqYJqC6O_hOfBEL_MTUvjkiC0ffKClXOiioyqLWAyyln8mGwxR3gxTaxkiEl__lE1TwJSoAsMA1QxQGrfZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer $SERVICE_ACCOUNT_TOKEN",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributeName\": \"teste\",\n    \"attributeValue\": \"zero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/realms/task-management/user-attribute-updater/users/gauss/attributes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"realms",
+								"task-management",
+								"user-attribute-updater",
+								"users",
+								"gauss",
+								"attributes"
+							]
+						},
+						"description": "Generated from cURL: curl -X PUT \\\n  http://localhost:8080/realms/my-realm/custom-attribute-updater/users/a1b2c3d4-e5f6-7890-1234-567890abcdef/attribute \\\n  -H 'Content-Type: application/json' \\\n  -H \"Authorization: Bearer $SERVICE_ACCOUNT_TOKEN\" \\\n  -d '{\n    \"attributeName\": \"susepPadrao\",\n    \"attributeValue\": \"COL10J\"\n  }'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Attributes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0bEFaMUpacHVGdFJVdUdtaU01TGtSN3V5QkhTNkNzaHpjd2cyWGgtMXJNIn0.eyJleHAiOjE3NTQ5NjQ5ODUsImlhdCI6MTc1NDk2MzE4NSwianRpIjoiNjk0MTgxNjQtNmRlMS00YjQ5LThkZjAtY2M2ODE4ZDZiMWE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy90YXNrLW1hbmFnZW1lbnQiLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiNmMwNDIwN2UtNDc4MC00YTljLWIzNWUtNjQxMzRiYTNlODUwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicmVzdC1jbGllbnQtaWQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtdGFzay1tYW5hZ2VtZW50Iiwib2ZmbGluZV9hY2Nlc3MiLCJ1cGRhdGUtdXNlci1hdHRyaWJ1dGVzLXJvbGUiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImdldC11c2VyLWF0dHJpYnV0ZXMtcm9sZSJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS1ncm91cHMiLCJxdWVyeS11c2VycyJdfSwicmVzdC1jbGllbnQtaWQiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImRhdGFfbGlzdCI6eyJkYXRhTGlzdCI6WyJkYXRhLTEiLCJkYXRhLTIiLCJkYXRhLTIiXX0sImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjE5Mi4xNjguNjUuMSIsImluZm9fZGF0YSI6eyJpbmZvRGF0YUxpc3QiOlt7ImluZm8iOiJpbmZvLWRhdGEtMSJ9LHsiaW5mbyI6ImluZm8tZGF0YS0yIn0seyJpbmZvIjoiaW5mby1kYXRhLTMifV19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtcmVzdC1jbGllbnQtaWQiLCJjbGllbnRBZGRyZXNzIjoiMTkyLjE2OC42NS4xIiwiY2xpZW50X2lkIjoicmVzdC1jbGllbnQtaWQifQ.pD-MBAmy6Nnvnqi-rMRaesAoD5qhjPCh0pZCkdtnun_EBHn2eo-CnI17mdTyqXszOHDzHZF3TvaSeTO7EMHzTVae3BLYbULVFj51KLZKQ-Zwux2eNp0JI5E09UcTLDCByTZldxj1R3QxODP3d05j7AVYI-MJh-FJUr-uoJceM8NrGyTj_9Si9UXSccalEI6bPbebfFokI9ngumOD212w6qp9hI9KQiXKr8fbQpXqsweWE6QBYl4l6eRF6oNQeUvyvxsWqYJqC6O_hOfBEL_MTUvjkiC0ffKClXOiioyqLWAyyln8mGwxR3gxTaxkiEl__lE1TwJSoAsMA1QxQGrfZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer $SERVICE_ACCOUNT_TOKEN",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributeName\": \"teste-1\",\n    \"attributeValue\": \"zero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/realms/task-management/user-attribute-updater/users/gauss/attribute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"realms",
+								"task-management",
+								"user-attribute-updater",
+								"users",
+								"gauss",
+								"attribute"
+							]
+						},
+						"description": "Generated from cURL: curl -X PUT \\\n  http://localhost:8080/realms/my-realm/custom-attribute-updater/users/a1b2c3d4-e5f6-7890-1234-567890abcdef/attribute \\\n  -H 'Content-Type: application/json' \\\n  -H \"Authorization: Bearer $SERVICE_ACCOUNT_TOKEN\" \\\n  -d '{\n    \"attributeName\": \"susepPadrao\",\n    \"attributeValue\": \"COL10J\"\n  }'"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
