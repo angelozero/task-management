@@ -1,8 +1,7 @@
-# Task-Management: Documentação Técnica de Módulos de Estudo
+# Task-Management API
 
-Este documento serve como um repositório central de documentação técnica para o projeto de estudo `task-management`. Cada seção abaixo detalha uma metodologia, técnica ou prática de software específica implementada como um módulo independente dentro do projeto.
-
-A documentação foi gerada por uma IA atuando como Arquiteto de Software e Documentador Técnico Sênior, analisando a estrutura e os conceitos de cada tópico de estudo. O objetivo é que cada seção seja autossuficiente e sirva como um guia de referência claro e conciso para o conceito que ela aborda.
+Documentação técnica para o projeto de estudo task-management. 
+Cada seção abaixo detalha uma metodologia, técnica ou prática de software específica implementada como um módulo independente dentro do projeto.
 
 ## Índice
 
