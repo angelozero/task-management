@@ -23,12 +23,12 @@ A documentação foi gerada por uma IA atuando como Arquiteto de Software e Docu
 *   [08. Integração com API Externa (PokeAPI)](#08-integração-com-api-externa-pokeapi)
 *   [09. Circuit Breaker com Resilience4J](#09-implementação-de-padrão-circuit-breaker-com-resilience4j)
 *   [10. APIs com gRPC e GraphQL](#10-expondo-apis-com-grpc-e-graphql)
-*   [12. Cache com Redis](#12-cache-de-serviço-para-pokeapi-usando-redis)
-*   [13. Modelação com Sealed Classes](#13-modelação-de-domínio-com-sealed-e-non-sealed-classes)
-*   [14. Orquestração de Dual Datasource](#14-orquestração-de-múltiplos-datasources-readwrite-splitting)
-*   [16. Registro Dinâmico de Beans](#16-registro-dinâmico-de-beans-com-beandefinitionregistrypostprocessor)
-*   [17. Aplicação de Design Patterns](#17-aplicação-de-design-patterns-no-projeto)
-*   [19. Autenticação com JWT e Keycloak](#19-autenticação-e-autorização-com-jwt-e-keycloak)
+*   [11. Cache com Redis](#11-cache-de-serviço-para-pokeapi-usando-redis)
+*   [12. Modelação com Sealed Classes](#12-modelação-de-domínio-com-sealed-e-non-sealed-classes)
+*   [13. Orquestração de Dual Datasource](#13-orquestração-de-múltiplos-datasources-readwrite-splitting)
+*   [14. Registro Dinâmico de Beans](#14-registro-dinâmico-de-beans-com-beandefinitionregistrypostprocessor)
+*   [15. Aplicação de Design Patterns](#15-aplicação-de-design-patterns-no-projeto)
+*   [16. Autenticação com JWT e Keycloak](#16-autenticação-e-autorização-com-jwt-e-keycloak)
 
 ---
 
@@ -292,7 +292,7 @@ resilience4j.circuitbreaker:
 
 ---
 
-## 12. Cache de Serviço para PokeApi usando Redis
+## 11. Cache de Serviço para PokeApi usando Redis
 
 ### Título: Cache de Serviço para PokeApi usando Redis
 
@@ -325,7 +325,7 @@ spring.cache.redis.time-to-live=600000
 
 ---
 
-## 13. Modelação de Domínio com Sealed e Non-Sealed Classes
+## 12. Modelação de Domínio com Sealed e Non-Sealed Classes
 
 ### Título: Modelação de Domínio com Sealed e Non-Sealed Classes
 
@@ -388,7 +388,7 @@ Esta é uma funcionalidade da linguagem Java (versão 17+). Não requer dependê
 
 ---
 
-## 14. Orquestração de Múltiplos DataSources (Read/Write Splitting)
+## 13. Orquestração de Múltiplos DataSources (Read/Write Splitting)
 
 ### Título: Orquestração de Múltiplos DataSources (Read/Write Splitting)
 
@@ -493,7 +493,7 @@ spring.datasource.replica.password=password_readonly
 
 ---
 
-## 16. Registro Dinâmico de Beans com BeanDefinitionRegistryPostProcessor
+## 14. Registro Dinâmico de Beans com BeanDefinitionRegistryPostProcessor
 
 ### Título: Registro Dinâmico de Beans com BeanDefinitionRegistryPostProcessor
 
@@ -593,7 +593,7 @@ app.notifications.enabled-channels=email,sms,push
 
 ---
 
-## 17. Aplicação de Design Patterns no Projeto
+## 15. Aplicação de Design Patterns no Projeto
 
 ### Título: Aplicação de Design Patterns no Projeto
 
@@ -694,7 +694,7 @@ app.notifications.enabled-channels=email,sms,push
 
 ---
 
-## 19. Autenticação e Autorização com JWT e Keycloak
+## 16. Autenticação e Autorização com JWT e Keycloak
 
 ### Título: Autenticação e Autorização com JWT e Keycloak
 
