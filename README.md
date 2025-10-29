@@ -1,5 +1,7 @@
 # Task-Management API
 
+*(for english version click here (Readme-En.md)[https://github.com/angelozero/task-management/blob/master/README-En-Us.md])*
+
 Documentação técnica para o projeto de estudo task-management. 
 Cada seção abaixo detalha uma metodologia, técnica ou prática de software específica implementada como um módulo independente dentro do projeto.
 
